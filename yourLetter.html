@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Letter</title>
+<link rel="stylesheet" href="letterStyle.css">
+</head>
+<body>
+  <div id="heartContainer">
+  <div id="cover" onclick="peelCover()">Click to Reveal</div>
+<div class="letter-container" style="display:none;">
+  <h1>Dear My Duckling,</h1>
+  <p>
+    I wrote this letter with you in my mind and in my heart. It's been several months since we got to know each other, and I've never met anyone as unique as you in my entire life. Every time I see you, my heart melts, my eyes shine, and I can't help but smile. Seeing your beautiful smile brightens my day like the morning sun. And your eyes—I've been lost in them countless times; they twinkle like stars at night, like fireflies illuminating the darkness. Staring into them is something I could never tire of.</p><p>Your presence brings warmth, like a blanket on a cold night or a pillow held tight. But it's not just the good things that I love about you. You're always sleepy, you get annoyed easily, you complain all the time, you hate going out, and you say you're nonchalant, but I know you're not. You try to highlight your flaws to push me away, but the more I learn about you, the deeper I fall. You have a truly good heart, and you deserve to be loved and cared for deeply.</p> <p>I appreciate you more than words can say, and I'm so grateful you came into my life. Know that I'm always here for you. Happy Valentine's Day, Mich, Tik, my duckling. I love you. Please take care always.</p>
+ 
+  <p>With all my love,</p>
+  <p>Bin</p>
+</div>
+</div>
+<script>
+function peelCover() {
+  const cover = document.getElementById('cover');
+  cover.style.animation = "peelEffect 2s forwards";
+
+  // Play music
+  const music = new Audio('Everytime Instrumental.m4a'); // Update the path to your audio file
+  music.play();
+
+  cover.addEventListener('animationend', () => {
+    cover.style.display = 'none';
+    document.querySelector('.letter-container').style.display = 'block';
+  });
+}
+
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.textContent = '❤️'; // The heart emoji
+  heart.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+  heart.style.animationDuration = Math.random() * 5 + 5 + 's'; // Random duration between 3 and 5 seconds
+
+  heart.style.animationName = 'floatUp';
+  document.body.appendChild(heart); // Append heart to body
+
+
+
+  heart.addEventListener('animationend', function() {
+    heart.remove();
+  });
+}
+
+setInterval(createHeart, 300);
+</script>
+</body>
+</html>

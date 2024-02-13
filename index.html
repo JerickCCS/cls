@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.flower {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.petal {
+  width: 60px; 
+  height: 120px; 
+  background-color: pink;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.center {
+  width: 40px; 
+  height: 40px; 
+  background-color: yellow;
+  border-radius: 50%;
+  position: absolute;
+}
+
+
+#petal1 { transform: rotate(0deg) translateY(-60px); }
+#petal2 { transform: rotate(51.4deg) translateY(-60px); }
+#petal3 { transform: rotate(102.8deg) translateY(-60px); }
+#petal4 { transform: rotate(154.2deg) translateY(-60px); }
+#petal5 { transform: rotate(205.6deg) translateY(-60px); }
+#petal6 { transform: rotate(257deg) translateY(-60px); }
+#petal7 { transform: rotate(308.4deg) translateY(-60px); }
+
+#message {
+  position: absolute;
+  bottom: 100px; 
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  color: #333;
+  text-align: center;
+  width: 80%;
+}
+
+#confetti-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes confetti-fall {
+  0% { top: -10%; }
+  100% { top: 110%; }
+}
+</style>
+<title>Flower Game</title>
+</head>
+<body>
+  <div id="confetti-wrapper"></div>
+<div id="message"></div>
+<div class="flower">
+  <div class="petal" id="petal1"></div>
+  <div class="petal" id="petal2"></div>
+  <div class="petal" id="petal3"></div>
+  <div class="petal" id="petal4"></div>
+  <div class="petal" id="petal5"></div>
+  <div class="petal" id="petal6"></div>
+  <div class="petal" id="petal7"></div>
+  <div class="center"></div>
+</div>
+
+
+
+<script>
+  let petalsLeft = 7;
+
+document.querySelectorAll('.petal').forEach(petal => {
+  petal.addEventListener('click', function() {
+    this.remove(); 
+    petalsLeft--;
+    if (petalsLeft % 2 === 0) {
+      document.getElementById('message').innerText = "He loves me!!";
+    } else {
+      document.getElementById('message').innerText = "He loves me not";
+    }
+
+    if (petalsLeft === 0) {
+      partyPopper();
+    }
+  });
+});
+
+function partyPopper() {
+  const confettiCount = 100;
+  const confettiWrapper = document.getElementById('confetti-wrapper');
+
+  for (let i = 0; i < confettiCount; i++) {
+    const confetti = document.createElement('div');
+    confetti.classList.add('confetti');
+    confetti.style.left = `${Math.random() * 100}vw`;
+    confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    confetti.style.opacity = Math.random();
+    confetti.style.transform = `scale(${Math.random()}) rotate(${Math.random() * 360}deg)`;
+    confetti.style.height = `${Math.random() * 10 + 5}px`;
+    confetti.style.width = `${Math.random() * 10 + 5}px`;
+    confetti.style.position = 'absolute';
+    confetti.style.top = `${Math.random() * 100}vh`;
+    confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear`;
+
+    confettiWrapper.appendChild(confetti);
+  }
+
+  setTimeout(() => {
+    window.location.href = 'heart.html';
+  }, 5000); 
+}
+</script>
+</body>
+</html>
